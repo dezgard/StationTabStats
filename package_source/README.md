@@ -26,7 +26,7 @@ Install and enable the `.semod` with Star Empire Mod Manager. Open a station
 you own or manage, then select **Specs**. Use the mouse wheel over the page to
 scroll through fitted weapons and modifiers.
 
-From v0.4.1 onward, the Mod Manager can check the official
+From v0.1 onward, the Mod Manager can check the official
 `dezgard/StationTabStats` GitHub releases for newer versions.
 
 The tab follows the game's normal station rules. It only appears when you have
