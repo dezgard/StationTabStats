@@ -25,5 +25,10 @@
     "ui.render"
   ],
   "schema": 1,
-  "version": "0.4"
+  "update": {
+    "asset": "StarEmpireBaseStats-v*.semod",
+    "repository": "dezgard/StationTabStats",
+    "type": "github-release"
+  },
+  "version": "0.4.1"
 }
