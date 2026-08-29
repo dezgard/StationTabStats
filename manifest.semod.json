@@ -1,0 +1,29 @@
+{
+  "author": "Dezgard",
+  "compatibility": {
+    "game_versions": [
+      "0.4.91"
+    ],
+    "mode": "game-version"
+  },
+  "conflicts": [],
+  "dependencies": [],
+  "description": "Adds a compact station Specs dashboard with live banks, fitted weapon projections and per-plugin bonuses.",
+  "entrypoint": "star_empire_base_stats:register",
+  "files": [
+    "mod/star_empire_base_stats/README.md",
+    "mod/star_empire_base_stats/__init__.py",
+    "mod/star_empire_base_stats/preview.png"
+  ],
+  "format": "star-empire-mod",
+  "load_after": [],
+  "loader_api": 1,
+  "mod_id": "star_empire_base_stats",
+  "name": "Star Empire Base Stats",
+  "permissions": [
+    "ui.input",
+    "ui.render"
+  ],
+  "schema": 1,
+  "version": "0.4"
+}
