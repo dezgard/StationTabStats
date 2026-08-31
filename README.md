@@ -1,8 +1,8 @@
 # Star Empire Base Stats
 
-Base Stats adds a compact **Specs** dashboard to your station window. It puts
-the station's shield, energy, fitted weapon and plugin figures together so you
-can see what the current base setup is doing.
+Base Stats adds a compact **Specs** dashboard to station windows you are
+allowed to manage. This includes your own stations and coalition stations
+where the server has granted your rank management access.
 
 ![Base Stats dashboard](package_source/preview.png)
 
@@ -28,16 +28,18 @@ then install and enable it with Star Empire Mod Manager.
 
 ## Using the mod
 
-Install and enable the `.semod` with Star Empire Mod Manager. Open a station
-you own or manage, then select **Specs**. Use the mouse wheel over the page to
-scroll through fitted weapons and modifiers.
+Install and enable the `.semod` with Star Empire Mod Manager. Open your own
+station or an authorized coalition station, then select **Specs**. Team
+stations are marked **TEAM** in the page heading. Use the mouse wheel over the
+page to scroll through fitted weapons and modifiers.
 
 From v0.1 onward, the Mod Manager can check the official
 `dezgard/StationTabStats` GitHub releases for newer versions.
 
-The tab follows the game's normal station rules. It only appears when you have
-management access, and it only reports the station you currently have open.
-Scroll over the page to reach additional weapons and plugin rows.
+The tab follows the game's normal station rules. It never grants management
+access. It only appears when the server says you may manage the current
+station, and it only reports that station. Scroll over the page to reach
+additional weapons and plugin rows.
 
 ## Notes
 
@@ -60,4 +62,4 @@ from the fitted station items and the station-plugin stat sheets supplied by
 the server. The mod does not use your ship's turret data or apply hidden bonus
 rules that the client cannot verify.
 
-Tested with Star Empire 0.4.91 using Mod Loader API 1.
+Tested with Star Empire 0.4.94 using Mod Loader API 1.

@@ -2,13 +2,13 @@
   "author": "Dezgard",
   "compatibility": {
     "game_versions": [
-      "0.4.91"
+      "0.4.94"
     ],
     "mode": "game-version"
   },
   "conflicts": [],
   "dependencies": [],
-  "description": "Adds a compact station Specs dashboard with live banks, fitted weapon projections and per-plugin bonuses.",
+  "description": "Adds a compact Specs dashboard to owned and team stations you can manage.",
   "entrypoint": "star_empire_base_stats:register",
   "files": [
     "mod/star_empire_base_stats/README.md",
@@ -30,5 +30,5 @@
     "repository": "dezgard/StationTabStats",
     "type": "github-release"
   },
-  "version": "0.1"
+  "version": "0.2"
 }
