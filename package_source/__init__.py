@@ -1,4 +1,4 @@
-"""Live specifications page for the currently docked player station."""
+"""Live specifications page for the currently docked managed station."""
 
 from __future__ import annotations
 
@@ -367,6 +367,12 @@ class _BaseStats:
             and overlay.get("kind") == "player_station" else None
         )
 
+    @staticmethod
+    def _is_owner(host: Any, data: Mapping[str, Any]) -> bool:
+        username = str(getattr(host, "_username", "") or "")
+        return bool(data.get(
+            "is_owner", data.get("owner_name") == username))
+
     @classmethod
     def _access(cls, host: Any) -> tuple[bool, str, dict]:
         overlay = cls._overlay(host)
@@ -375,9 +381,7 @@ class _BaseStats:
         data = overlay.get("data") or {}
         if not isinstance(data, dict):
             data = {}
-        username = str(getattr(host, "_username", "") or "")
-        is_owner = bool(data.get(
-            "is_owner", data.get("owner_name") == username))
+        is_owner = cls._is_owner(host, data)
         can_manage = bool(data.get("management_access", is_owner))
         station_id = _station_key(
             data.get("attached_station_id", data.get("station_id")))
@@ -495,8 +499,11 @@ class _BaseStats:
 
         return {
             "station_id": station_id,
+            "station_scope": (
+                "owned" if self._is_owner(host, overlay_data) else "team"),
+            "owner_name": str(overlay_data.get("owner_name", "") or ""),
             "name": str(overlay_data.get(
-                "station_name", live.get("display_name", "Player Station"))),
+                "station_name", live.get("display_name", "Station"))),
             "shield": {
                 "current": shield_current,
                 "maximum": shield_max,
@@ -671,8 +678,10 @@ class _BaseStats:
             lines.append(current)
             return lines
 
+        scope = "  /  TEAM" if data.get("station_scope") == "team" else ""
         header = title_font.render(
-            self._fit(title_font, f"BASE SPECS  /  {data['name']}", width),
+            self._fit(
+                title_font, f"BASE SPECS  /  {data['name']}{scope}", width),
             True, accent)
         screen.blit(header, (x, y))
         y += header.get_height() + s(3)

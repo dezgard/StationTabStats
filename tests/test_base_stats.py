@@ -32,7 +32,7 @@ class InstallHost:
         return visible_player_station_tabs(True, False)
 
 
-def overlay(station_id="42", *, access=True) -> dict:
+def overlay(station_id="42", *, access=True, owner_name="Pilot") -> dict:
     return {
         "kind": "player_station",
         "body_rect": pygame.Rect(40, 40, 900, 680),
@@ -41,6 +41,8 @@ def overlay(station_id="42", *, access=True) -> dict:
             "attached_station_id": station_id,
             "station_name": "Test Bastion",
             "management_access": access,
+            "owner_name": owner_name,
+            "is_owner": owner_name == "Pilot",
             "max_shields": 1000,
             "shield_regen": 25,
             "max_energy": 800,
@@ -49,9 +51,10 @@ def overlay(station_id="42", *, access=True) -> dict:
     }
 
 
-def host(station_id="42", *, access=True):
+def host(station_id="42", *, access=True, owner_name="Pilot"):
     return SimpleNamespace(
-        _station_overlay=overlay(station_id, access=access),
+        _station_overlay=overlay(
+            station_id, access=access, owner_name=owner_name),
         _username="Pilot",
         _ps_tab="Specs",
         _deployed_stations=[{
@@ -120,6 +123,25 @@ class BaseStatsTests(unittest.TestCase):
         self.assertEqual(["Main", "Control"], wrapper(False, False))
         self.assertEqual(
             ["Main", "Control", "Specs"], wrapper(True, False))
+
+    def test_authorized_team_station_is_supported(self):
+        current = host("84", access=True, owner_name="Wingmate")
+
+        self.state.begin_frame(current)
+        result = self.state.snapshot(current)
+
+        self.assertEqual("Specs", current._ps_tab)
+        self.assertEqual("84", result["station_id"])
+        self.assertEqual("team", result["station_scope"])
+        self.assertEqual("Wingmate", result["owner_name"])
+
+    def test_team_station_without_management_access_is_denied(self):
+        current = host("84", access=False, owner_name="Wingmate")
+
+        self.state.begin_frame(current)
+
+        self.assertEqual("Main", current._ps_tab)
+        self.assertIsNone(self.state.snapshot(current))
 
     def test_install_wraps_and_uninstall_restores_only_station_tabs(self):
         current = InstallHost()
@@ -204,6 +226,7 @@ class BaseStatsTests(unittest.TestCase):
         self.assertAlmostEqual(96, result["power_drain"])
         self.assertAlmostEqual(-56, result["net_power"])
         self.assertEqual(["Targeting Matrix"], result["plugins"])
+        self.assertEqual("owned", result["station_scope"])
 
     def test_station_weapon_data_is_owned_by_the_current_station_context(self):
         second = host("84")
