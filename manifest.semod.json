@@ -2,7 +2,9 @@
   "author": "Dezgard",
   "compatibility": {
     "game_versions": [
-      "0.4.94"
+      "0.4.94",
+      "0.5.14",
+      "0.5.25"
     ],
     "mode": "game-version"
   },
@@ -30,5 +32,5 @@
     "repository": "dezgard/StationTabStats",
     "type": "github-release"
   },
-  "version": "0.2"
+  "version": "0.4"
 }

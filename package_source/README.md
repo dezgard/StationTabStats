@@ -56,4 +56,4 @@ from the fitted station items and the station-plugin stat sheets supplied by
 the server. The mod does not use your ship's turret data or apply hidden bonus
 rules that the client cannot verify.
 
-Tested with Star Empire 0.4.94 using Mod Loader API 1.
+Built for Star Empire 0.4.94, 0.5.14 and 0.5.25 using Mod Loader API 1.
